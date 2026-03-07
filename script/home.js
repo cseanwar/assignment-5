@@ -1,11 +1,13 @@
 const issuesContainer = document.getElementById("issues-container");
 let allIssues = [];
+let badgePriorityStyle = [];
 
 async function loadIssues() {
     const res = await fetch ("https://phi-lab-server.vercel.app/api/v1/lab/issues");
     const data = await res.json();
     allIssues = data.data;
     displayIssues(allIssues);
+    document.getElementById("total-issue").innerText = allIssues.length;
 }
 
 // "id": 1,
@@ -28,11 +30,22 @@ function displayIssues(issues) {
         const statusIcon = issue.status === "open" 
             ? "./assets/Open-Status.png" 
             : "./assets/Closed- Status .png";
+        
+        if (issue.priority === "high") {
+            badgePriorityStyle = "bg-[#FEECEC] text-xs text-[#EF4444] rounded-4xl  px-7 py-1";
+        }
+        else if (issue.priority === "medium") {
+            badgePriorityStyle = "bg-[#FFF6D1] text-[#F59E0B]";
+        }
+        else if (issue.priority === "low") {
+            badgePriorityStyle = "bg-[#EEEFF2] text-[#9CA3AF]";
+        }
+            
         const card = document.createElement("div");
         card.className = `bg-white shadow-md p-4 rounded-lg space-y-4`;
         card.innerHTML = `<div class="flex justify-between">
                         <img class="h-[24px] w-[24px]" src="${statusIcon}" alt="">
-                        <button class="bg-[#FEECEC] text-xs text-[#EF4444] rounded-4xl  px-7 py-1">${issue.priority}</button> 
+                        <button class="text-xs rounded-4xl  px-7 py-1 ${badgePriorityStyle}">${issue.priority}</button> 
                     </div>
                     <h6 class="font-semibold text-sm">${issue.title}</h6>
                     <p class="line-clamp-2 text-[#64748B] text-xs">${issue.description}</p>
@@ -86,6 +99,30 @@ function displayIssues(issues) {
         `;
         issuesContainer.appendChild(card);
     });
+} 
+
+async function filterIssues(st, clickedBtn) {
+    const allButtons = document.querySelectorAll(".issueBtn");
+
+    allButtons.forEach((btn) => {
+        btn.classList.remove("btn-primary");
+        btn.classList.add("btn-outline");
+    });
+    clickedBtn.classList.add("btn-primary");
+    clickedBtn.classList.remove("btn-outline");
+
+    let filteredIssues = [];
+    if (st === "open") {
+        filteredIssues = allIssues.filter(issue => issue.status === "open");
+    }
+    else if (st === "closed") {
+        filteredIssues = allIssues.filter(issue => issue.status === "closed");
+    }
+    else {
+        filteredIssues = allIssues;
+    }
+    displayIssues(filteredIssues);
+    document.getElementById("total-issue").innerText = filteredIssues.length;
 }
 
 loadIssues();
