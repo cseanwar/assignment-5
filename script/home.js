@@ -2,6 +2,7 @@ const issuesContainer = document.getElementById("issues-container");
 const loadingSpinner = document.getElementById("loadingSpinner");
 let allIssues = [];
 let badgePriorityStyle = [];
+let borderStyle = [];
 
 function showLoading() {
     loadingSpinner.classList.remove("hidden");
@@ -41,7 +42,14 @@ function displayIssues(issues) {
     issues.forEach((issue) => {
         const statusIcon = issue.status === "open" 
             ? "./assets/Open-Status.png" 
-            : "./assets/Closed- Status .png";
+            : "./assets/Closed-Status.png";
+        
+        if (issue.status === "open") {
+            borderStyle = "border-t-4 border-[#00A96E]";
+        }
+        if (issue.status === "closed") {
+            borderStyle = "border-t-4 border-[#A855F7]";
+        }
         
         if (issue.priority === "high") {
             badgePriorityStyle = "bg-[#FEECEC] text-xs text-[#EF4444] rounded-4xl  px-7 py-1";
@@ -54,10 +62,10 @@ function displayIssues(issues) {
         }
             
         const card = document.createElement("div");
-        card.className = `bg-white shadow-md p-4 rounded-lg space-y-4`;
+        card.className = `bg-white shadow-md p-4 rounded-lg space-y-4 ${borderStyle}`;
         card.innerHTML = `<div class="flex justify-between">
                         <img class="h-[24px] w-[24px]" src="${statusIcon}" alt="">
-                        <button class="text-xs rounded-4xl  px-7 py-1 ${badgePriorityStyle}">${issue.priority}</button> 
+                        <button class="text-xs rounded-4xl  px-7 py-1 ${badgePriorityStyle}">${issue.priority.toUpperCase()}</button> 
                     </div>
                     <h6 class="font-semibold text-sm">${issue.title}</h6>
                     <p class="line-clamp-2 text-[#64748B] text-xs">${issue.description}</p>
@@ -102,10 +110,10 @@ function displayIssues(issues) {
 
                         }).join("")}
                     </div>
-                    <div class="border-t border-[#E4E4E7] grid grid-cols-2 items-center space-y-2">
-                        <p class="text-[#64748B] text-xs justify-self-start">#${issue.id} by ${issue.author}</p>
+                    <div class="border-t border-[#E4E4E7] grid grid-cols-2 items-center">
+                        <p class="text-[#64748B] text-xs justify-self-start my-2">#${issue.id} by ${issue.author}</p>
                         <p class="text-[#64748B] text-xs justify-self-end">Created: ${new Date(issue.createdAt).toLocaleDateString()}</p>
-                        <p class="text-[#64748B] text-xs justify-self-start">${issue.assignee}</p>
+                        <p class="text-[#64748B] text-xs justify-self-start my-2">${issue.assignee}</p>
                         <p class="text-[#64748B] text-xs justify-self-end">Updated: ${new Date(issue.updatedAt).toLocaleDateString()}</p>
                     </div>
         `;
