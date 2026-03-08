@@ -1,5 +1,6 @@
 const issuesContainer = document.getElementById("issues-container");
 const loadingSpinner = document.getElementById("loadingSpinner");
+const searchInput = document.getElementById("search-input");
 let allIssues = [];
 let badgePriorityStyle = [];
 let borderStyle = [];
@@ -148,3 +149,17 @@ async function filterIssues(st, clickedBtn) {
 }
 
 loadIssues();
+
+
+searchInput.addEventListener("keydown", (event) => {
+  
+  if (event.key === "Enter") {
+    const searchValue = searchInput.value.trim().toLowerCase();
+      const filterWords = allIssues.filter((issue) =>
+        issue.title.toLowerCase().includes(searchValue)
+      );
+
+      displayIssues(filterWords);
+  }
+
+});
