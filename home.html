@@ -53,7 +53,7 @@
     </nav>
 
     <main class="bg-[#f8fafcFF]">
-        <section  class="w-9/12 mx-auto pt-[60px] mb-[16px]">
+        <section  class="w-10/12 mx-auto pt-[60px] mb-[16px]">
             <div id="button-container" class="bg-[#FFFFFF] w-full p-[24px] border border-gray-100 rounded-md shadow-sm">
                 <button onclick="filterIssues('all', this)" class="btn btn-primary issueBtn w-25 h-8 text-[#64748B] border-[#E4E4E7]">All</button>
                 <button onclick="filterIssues('open', this)" class="btn btn-outline issueBtn w-25 h-8 text-[#64748B] border-[#E4E4E7]">Open</button>
@@ -61,14 +61,14 @@
             </div>
         </section>
 
-        <section class="w-9/12 mx-auto">
+        <section class="w-10/12 mx-auto">
             <div class="flex flex-col gap-3 md:flex-row items-center justify-between bg-[#FFFFFF] border border-gray-100 rounded-md rounded-b-none p-4 shadow-sm">
                 <div class="flex items-center space-x-2">
                     <div class="flex items-center justify-center w-13 h-13 bg-[#ece4ffFF] rounded-full">
                         <img src="./assets/Aperture.png" alt="">
                     </div>
                     <div>
-                        <h2 class="text-2xl font-bold"><span id="total-issue">00</span> Issues</h2>
+                        <h2 class="text-2xl font-bold"><span id="total-issue">50</span> Issues</h2>
                         <p class="text-[#64748bFF] text-base">Track and manage your project issues</p>
                     </div>
                 </div>
@@ -86,8 +86,8 @@
         </section>
 
         <!-- Issues card -->
-        <section class="w-9/12 mx-auto card card-body bg-[#FBFBFB] border-t border-gray-200 rounded-t-none">
-            <div id="issues-container" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <section class="w-10/12 mx-auto card card-body bg-[#FBFBFB] border-t border-gray-200 rounded-t-none">
+            <div id="issues-container" class="grid grid-cols-1 md:grid-cols-4 gap-4 cursor-pointer">
                 <!-- Added dynamically by JS -->
             </div>
         </section>
@@ -96,6 +96,45 @@
         <div id="loadingSpinner" class="h-[60vh] flex hidden justify-center items-center">
             <span class="loading loading-spinner text-error"></span>
         </div>
+
+        <!-- Issue details modal -->
+        <dialog id="issueModalBox" class="modal">
+            <div class="modal-box space-y-6">
+                <h3 class="text-2xl font-bold" id="modalTitle">Fix broken image uploads</h3>
+                <div class="flex items-center space-x-3 text-[#64748bFF] text-sm">
+                    <div class="badge badge-success rounded-xl" id="statusBadge">Opened</div>
+                    <span>•</span>
+                    <p>Opened by <span id="authorName">Fahim Ahmed</span></p>
+                    <span>•</span>
+                    <span id="createdDate">22/02/2026</span>
+                </div>
+                <div id="modalBadge" class="flex gap-2 flex-wrap mt-2">
+                    <div class="badge badge-soft rounded-xl text-xs bg-[#FEECEC] border-2 border-[#FECACA] text-[#EF4444]">
+                        <span><img src="./assets/bug.png" alt=""></span>BUG
+                    </div>
+                    <div class="badge badge-warning rounded-xl text-xs bg-[#FFF8DB] text-[#D97706] border-2 border-[#fde68a]">
+                        <span><img src="./assets/help.png" alt=""></span>Help Wanted
+                    </div>
+                </div>
+                <p id="modalDescription" class="text-base text-[#64748bFF]">The navigation menu doesn't collapse properly on mobile devices. Need to fix the responsive behavior.</p>
+                <div class="bg-slate-50 rounded-2xl p-8 flex justify-between items-center">
+                    <div class="flex flex-col space-y-2">
+                        <p class="text-slate-400 text-lg mb-2">Assignee:</p>
+                        <p id="assigneeName">Fahim Ahmed</p>
+                    </div>
+                    <div class="flex flex-col space-y-2">
+                        <p class="text-slate-400 text-lg mb-2">Priority:</p>
+                        <div id="priorityBadge" class="badge badge-error rounded-xl px-3 py-2">HIGH</div>
+                    </div>
+                </div>
+                <div class="modal-action">
+                    <form method="dialog">
+                        <!-- if there is a button in form, it will close the modal -->
+                         <button class="btn btn-primary">Close</button>
+                    </form>
+                </div>
+            </div>
+        </dialog>
     </main>
 
     <script src="./script/home.js"></script>
