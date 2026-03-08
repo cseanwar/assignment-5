@@ -26,7 +26,7 @@
 </head>
 <body>
     <nav>
-        <div class="navbar flex justify-between px-[80px] bg-white shadow-sm">
+        <div class="navbar flex flex-col gap-3 md:flex-row justify-between px-[80px] bg-white shadow-sm">
             <div class="flex gap-1 justify-center items-center">
                 <img class="w-[36px]" src="./assets/github-logo.png" alt="">
                 <h3 class="font-semibold text-2xl">GitHub Issues Tracker</h3>
@@ -62,13 +62,13 @@
         </section>
 
         <section class="w-9/12 mx-auto">
-            <div class="flex items-center justify-between bg-[#FFFFFF] border border-gray-100 rounded-md rounded-b-none p-4 shadow-sm">
+            <div class="flex flex-col gap-3 md:flex-row items-center justify-between bg-[#FFFFFF] border border-gray-100 rounded-md rounded-b-none p-4 shadow-sm">
                 <div class="flex items-center space-x-2">
                     <div class="flex items-center justify-center w-13 h-13 bg-[#ece4ffFF] rounded-full">
                         <img src="./assets/Aperture.png" alt="">
                     </div>
                     <div>
-                        <h2 class="text-xl font-bold"><span id="total-issue">00</span> Issues</h2>
+                        <h2 class="text-2xl font-bold"><span id="total-issue">00</span> Issues</h2>
                         <p class="text-[#64748bFF] text-base">Track and manage your project issues</p>
                     </div>
                 </div>
@@ -91,6 +91,11 @@
                 <!-- Added dynamically by JS -->
             </div>
         </section>
+
+        <!-- spinner -->
+        <div id="loadingSpinner" class="h-[60vh] flex hidden justify-center items-center">
+            <span class="loading loading-spinner text-error"></span>
+        </div>
     </main>
 
     <script src="./script/home.js"></script>

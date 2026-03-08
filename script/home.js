@@ -1,13 +1,25 @@
 const issuesContainer = document.getElementById("issues-container");
+const loadingSpinner = document.getElementById("loadingSpinner");
 let allIssues = [];
 let badgePriorityStyle = [];
 
+function showLoading() {
+    loadingSpinner.classList.remove("hidden");
+    issuesContainer.innerHTML = "";
+}
+
+function hideLoading() {
+    loadingSpinner.classList.add("hidden")
+}
+
 async function loadIssues() {
+    showLoading();
     const res = await fetch ("https://phi-lab-server.vercel.app/api/v1/lab/issues");
     const data = await res.json();
     allIssues = data.data;
     displayIssues(allIssues);
     document.getElementById("total-issue").innerText = allIssues.length;
+    hideLoading();
 }
 
 // "id": 1,
@@ -102,6 +114,7 @@ function displayIssues(issues) {
 } 
 
 async function filterIssues(st, clickedBtn) {
+    showLoading();
     const allButtons = document.querySelectorAll(".issueBtn");
 
     allButtons.forEach((btn) => {
@@ -123,6 +136,7 @@ async function filterIssues(st, clickedBtn) {
     }
     displayIssues(filteredIssues);
     document.getElementById("total-issue").innerText = filteredIssues.length;
+    hideLoading();
 }
 
 loadIssues();
