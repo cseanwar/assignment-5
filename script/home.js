@@ -165,13 +165,13 @@ async function openIssueModal(id) {
   priorityBadge.innerText = issueDetails.priority.toUpperCase();
   let priorityBadgeColors = "";
     if (issueDetails.priority === "high") {
-        priorityBadgeColors = "bg-red-500 text-white rounded-4xl  px-4 py-2";
+        priorityBadgeColors = "bg-red-500 text-white rounded-4xl text-xs px-4 py-1";
     }
     else if (issueDetails.priority === "medium") {
-        priorityBadgeColors = "bg-[#F59E0B] text-black rounded-4xl  px-4 py-2";
+        priorityBadgeColors = "bg-[#F59E0B] text-black rounded-4xl text-xs px-4 py-1";
     }
     else if (issueDetails.priority === "low") {
-        priorityBadgeColors = "bg-[#EEEFF2] text-[#9CA3AF] rounded-4xl  px-4 py-2";
+        priorityBadgeColors = "bg-[#EEEFF2] text-[#9CA3AF] rounded-4xl text-xs px-4 py-1";
     }
     priorityBadge.className = priorityBadgeColors;
 
