@@ -267,4 +267,5 @@ searchInput.addEventListener("keydown", (event) => {
       document.getElementById("total-issue").innerText = filterWords.length;
       hideSpinner();
     }
+    searchInput.value = "";
 });
